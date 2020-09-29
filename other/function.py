@@ -77,8 +77,7 @@ def load_data():
     x = x/255.0
     
     return [x,y]
-(a , b ) = load_data()
-print(a)
+
 
 
 
