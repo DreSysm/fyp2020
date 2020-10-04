@@ -1,12 +1,16 @@
-from function import load_data , load_data_name
+from function import  load_data_name
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+import joblib
 
-(x,y) = load_data()
+# (x,y) = load_data()
 
-x_train, x_test, y_train,y_test = train_test_split(x,y,test_size=0.1)
+# x_train, x_test, y_train,y_test = train_test_split(x,y,test_size=0.1)
+x_train = joblib.load("x.pkl")
+y_train = joblib.load("y.pkl")
+
 
 input_layer = tf.keras.Input([200,200,3])
 
