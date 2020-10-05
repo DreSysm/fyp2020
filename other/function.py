@@ -41,16 +41,15 @@ def load_data_name():
     return mynewlist
 
 def dataLabel():
-    for name in load_data_name():
+    for name in Label:
         data_path = os.path.join(image_path,name)
-        label = load_data_name().index(name)
-        # print(name)
+        label = Label.index(name)
         for image_name in os.listdir(data_path):
             path = os.path.join(data_path, image_name)
             image = cv2.imread(path)
             iamge = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
             image = cv2.resize(image,(200,200))
-            image = np.array(image,dtype=np.float32)
+            # image = np.array(image,dtype=np.float32)
             data_and_label.append([image,label])
             
             # cv2.imshow("image",image)
@@ -63,10 +62,15 @@ def dataLabel():
     for image , label in data_and_label:
         x.append(image)
         y.append(label)
-    X = np.array(x).reshape(-1,200,200,1)
-    
+    X = np.array(x)
+    Y = np.array(y)
+    print(X.shape)
+    print(type(X))
+    print(Y.shape)
+    print(type(Y))
+
     save_x = joblib.dump(X,"x.pkl")
-    save_y = joblib.dump(y,"y.pkl")
+    save_y = joblib.dump(Y,"y.pkl")
     # save_data_X = open("x.pickle","wb")
     # pickle.dump(X,save_data_X)
     # save_data_X.close()
