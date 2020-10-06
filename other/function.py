@@ -47,7 +47,7 @@ def dataLabel():
         for image_name in os.listdir(data_path):
             path = os.path.join(data_path, image_name)
             image = cv2.imread(path)
-            iamge = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+            # iamge = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
             image = cv2.resize(image,(200,200))
             # image = np.array(image,dtype=np.float32)
             data_and_label.append([image,label])
@@ -78,8 +78,6 @@ def dataLabel():
     # save_data_Y = open("y.pickle","wb")
     # pickle.dump(y,save_data_Y)
     # save_data_Y.close()
-
-dataLabel()
 
 # def load_data():
 #     load = open("data.pickle","rb")

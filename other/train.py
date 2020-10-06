@@ -18,27 +18,53 @@ x_train = x_train/255.0
 x_train = np.asarray(x_train)
 y_train = np.asarray(y_train)
 
-print("x shape",x_train.shape)
-print("y shape",y_train.shape)
+# print("x shape",x_train.shape)
+# print("y shape",y_train.shape)
 
+# x_train, x_test, y_train,y_test = train_test_split(x_train,y_train,test_size=0.1)
 
 model = Sequential()
-model.add( Conv2D(64,(3,3),input_shape = x_train.shape[1:]) )
+model.add( Conv2D(32,(3,3),input_shape = x_train.shape[1:]) )
 model.add(Activation("relu") )
 model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Dropout(0.25))
 
 model.add( Conv2D(64,(3,3)) )
 model.add(Activation("relu") )
 model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Dropout(0.25))
+
+model.add( Conv2D(128,(3,3)) )
+model.add(Activation("relu") )
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Dropout(0.25))
+
+model.add( Conv2D(256,(3,3)) )
+model.add(Activation("relu") )
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Dropout(0.25))
+
+model.add( Conv2D(512,(3,3)) )
+model.add(Activation("relu") )
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Dropout(0.25))
+
+model.add( Conv2D(1024,(3,3)) )
+model.add(Activation("relu") )
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Dropout(0.25))
 
 model.add(Flatten())
-model.add(Dense(64))
+model.add(Dense(2048, activation='relu'))
+model.add(Dropout(0.5))
 
-model.add(Dense(1))
-model.add(Activation("sigmoid"))
+model.add(Dense(1024, activation='relu'))
+model.add(Dropout(0.5))
 
-model.compile(loss="binary_crossentropy",optimizer="adam",metrics=["accuracy"])
-model.fit(x_train,y_train,batch_size=32 ,epochs=10,validation_split=0.1)
+model.add(Dense(555, activation='softmax'))
+
+model.compile(loss="sparse_categorical_crossentropy",optimizer="adam",metrics=["accuracy"])
+model.fit(x_train,y_train,batch_size=64 ,epochs=20,validation_split=0.1)
 model.save("test.h5")
 
 # input_layer = tf.keras.Input([200,200,3])
