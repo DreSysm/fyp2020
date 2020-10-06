@@ -26,33 +26,27 @@ y_train = np.asarray(y_train)
 model = Sequential()
 model.add( Conv2D(32,(3,3),input_shape = x_train.shape[1:]) )
 model.add(Activation("relu") )
-model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
+model.add(MaxPooling2D(pool_size=(3,3)))
+
 
 model.add( Conv2D(64,(3,3)) )
 model.add(Activation("relu") )
-model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
-
 model.add( Conv2D(128,(3,3)) )
 model.add(Activation("relu") )
 model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
+
 
 model.add( Conv2D(256,(3,3)) )
 model.add(Activation("relu") )
-model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
-
 model.add( Conv2D(512,(3,3)) )
 model.add(Activation("relu") )
 model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
+
 
 model.add( Conv2D(1024,(3,3)) )
 model.add(Activation("relu") )
 model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
+
 
 model.add(Flatten())
 model.add(Dense(2048, activation='relu'))
@@ -64,7 +58,7 @@ model.add(Dropout(0.5))
 model.add(Dense(555, activation='softmax'))
 
 model.compile(loss="sparse_categorical_crossentropy",optimizer="adam",metrics=["accuracy"])
-model.fit(x_train,y_train,batch_size=64 ,epochs=20,validation_split=0.1)
+model.fit(x_train,y_train,batch_size=256 ,epochs=20,validation_split=0.1)
 model.save("test.h5")
 
 # input_layer = tf.keras.Input([200,200,3])
