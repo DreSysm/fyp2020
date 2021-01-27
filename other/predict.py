@@ -6,7 +6,7 @@ Label = ['Black footed Albatross', 'Laysan Albatross', 'Sooty Albatross', 'Groov
 
 model = tf.keras.models.load_model("./model/0.6819.h5")
 
-image = cv2.imread("a.jpg")
+image = cv2.imread("Pied_Kingfisher.jpg")
 image = cv2.resize(image,(224,224))
 image = np.expand_dims(image, axis=0)
 image = image/255.0
