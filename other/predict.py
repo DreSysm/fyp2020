@@ -31,17 +31,27 @@ def result(photo):
 
     res = sorted(predict_result, key = lambda x: x[1], reverse = True)[:5]
     Top5_similar_bird = []
+    z = 1
     for x in range(len(res)):
 
         for y in range(len(Label)):
             if y == res[x][0]:
+                # name = str(z)+": "+Label[y]
                 Top5_similar_bird.append(Label[y])
+                # z+=1
                 break
     # print("1st:",Top5_similar_bird[0])
     # print("2nd:",Top5_similar_bird[1])
     # print("3rd:",Top5_similar_bird[2])
     # print("4th:",Top5_similar_bird[3])
     # print("5th:",Top5_similar_bird[4])
-    return Top5_similar_bird
+    n = len(Top5_similar_bird) 
+    key_list = ["name"] 
+    res = [] 
+    for idx in range(0, n, 1): 
+	    res.append({key_list[0]: Top5_similar_bird[idx]}) 
+
+
+    return res
     
 # top_5 = result("Pied_Kingfisher.jpg")
