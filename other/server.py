@@ -6,6 +6,7 @@ import predict
 import requests
 import os
 import json
+from bson.json_util import dumps
 
 
 
@@ -17,16 +18,12 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 @app.route('/predict_result', methods=['POST']) #receive photo and predict result ,then give user five options.
 def predict_result():
-    json_bird = []
     uploaded_file = request.files['image']
     uploaded_file.save(dir_path+'/image/'+uploaded_file.filename)
     ans = predict.result('./image/'+uploaded_file.filename)
     os.remove(dir_path+'/image/'+uploaded_file.filename)
-    # print("complete")
-    # print(ans)
-    # for x in ans:
-    #     print(x)
-
+    
+    print(ans)
     return  json.dumps(ans)
 
 
@@ -36,7 +33,22 @@ def return_info():
     bird_info = collection.find_one({"name":bird_name})
     return json.dumps(bird_info)
 
+@app.route('/bird_list') 
+def bird_list():
+    all_bird = collection.find()
+    all_bird = list(all_bird)
 
+    return json.dumps(all_bird)
+
+@app.route('/search',methods=['POST']) 
+def search():
+    bird_name = request.json["search_bird"]
+    print(bird_name)
+    myquery = { "name": { "$regex": bird_name ,"$options": "-i"} }
+    bird_info = collection.find(myquery)
+    bird_info = list(bird_info)
+
+    return json.dumps(bird_info)
 
 if __name__ == '__main__':
    app.run(debug=True)
