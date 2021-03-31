@@ -23,7 +23,7 @@ def predict_result():
     ans = predict.result('./image/'+uploaded_file.filename)
     os.remove(dir_path+'/image/'+uploaded_file.filename)
     
-    print(ans)
+    print("OK")
     return  json.dumps(ans)
 
 
@@ -33,14 +33,14 @@ def return_info():
     bird_info = collection.find_one({"name":bird_name})
     return json.dumps(bird_info)
 
-@app.route('/bird_list') 
+@app.route('/bird_list') # return all the birds information to the application
 def bird_list():
     all_bird = collection.find()
     all_bird = list(all_bird)
 
     return json.dumps(all_bird)
 
-@app.route('/search',methods=['POST']) 
+@app.route('/search',methods=['POST'])  #get the keyword from the application and return search result to the application
 def search():
     bird_name = request.json["search_bird"]
     print(bird_name)

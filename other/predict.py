@@ -36,11 +36,10 @@ def result(photo):
     predict_result = list(zip(i,b))
     # print(predict_result)
 
-    res = sorted(predict_result, key = lambda x: x[1], reverse = True)[:5]
+    res = sorted(predict_result, key = lambda x: x[1], reverse = True)[:5] # sorting top 5 birds
     Top5_similar_bird = []
     z = 1
-    for x in range(len(res)):
-
+    for x in range(len(res)): # match the label and the result
         for y in range(len(Label)):
             if y == res[x][0]:
                 # name = str(z)+": "+Label[y]
@@ -56,7 +55,7 @@ def result(photo):
     key_list = ["name","photo"] 
     res = [] 
     
-    for idx in range(0, n, 1): 
+    for idx in range(0, n, 1): # convert the data in dict form
         
         bird_info = collection.find_one({"name":Top5_similar_bird[idx]})
         res.append({key_list[0]: Top5_similar_bird[idx],key_list[1]:bird_info["photo"] }) 
@@ -64,5 +63,3 @@ def result(photo):
 
 
     return res
-    
-

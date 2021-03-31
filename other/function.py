@@ -54,7 +54,7 @@ def Data_augmentation():
                     break
 
 
-
+# some script for help me to due with the data
 def createDIR():
     for name in Label:
         os.mkdir(test_path+name)
@@ -93,6 +93,7 @@ def load_data_name():
         mynewlist = pickle.load(f)
     return mynewlist
 
+# match the data and the label to joblib form
 def dataLabel():
     for name in Label:
         data_path = os.path.join(image_path,name)
